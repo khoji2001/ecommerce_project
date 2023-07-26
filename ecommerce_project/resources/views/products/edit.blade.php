@@ -18,6 +18,15 @@
             <label for="details">Details:</label>
             <textarea id="details" name="details">{{ $product->details }}</textarea>
         </div>
+        <div>
+            <label for="category">Category:</label>
+            <select id="category" name="category_id">
+                <option value="">Select a category</option>
+                @foreach($categories as $category)
+                    <option value="{{ $category->id }}" @if($category->id === $product->category_id) selected @endif>{{ $category->name }}</option>
+                @endforeach
+            </select>
+        </div>
         <button type="submit">Update</button>
     </form>
 @endsection

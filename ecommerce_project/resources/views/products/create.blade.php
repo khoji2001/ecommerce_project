@@ -17,6 +17,15 @@
             <label for="details">Details:</label>
             <textarea id="details" name="details"></textarea>
         </div>
+        <div>
+            <label for="category">Category:</label>
+            <select id="category" name="category_id">
+                <option value="">Select a category</option>
+                @foreach($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                @endforeach
+            </select>
+        </div>
         <button type="submit">Create</button>
     </form>
 @endsection

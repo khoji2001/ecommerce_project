@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Category;
+
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -15,7 +17,8 @@ class ProductController extends Controller
 
     public function create()
     {
-        return view('products.create');
+        $categories = Category::all();
+        return view('products.create',compact('categories'));
     }
 
     public function store(Request $request)
@@ -25,6 +28,7 @@ class ProductController extends Controller
             'name' => 'required|string',
             'price' => 'required|numeric|min:0',
             'details' => 'nullable|json',
+            'category_id' => 'nullable|exists:categories,id', // Make sure category_id exists in the categories table
         ]);
 
         Product::create($data);
@@ -49,6 +53,7 @@ class ProductController extends Controller
             'name' => 'required|string',
             'price' => 'required|numeric|min:0',
             'details' => 'nullable|json',
+            'category_id' => 'nullable|exists:categories,id', // Make sure category_id exists in the categories table
         ]);
 
         $product->update($data);
